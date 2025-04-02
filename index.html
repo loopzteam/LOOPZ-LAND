@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loopz</title>
     <style>
-        /* Preload font to prevent text shifting */
-        @font-face {
-            font-family: 'Arial';
-            font-display: swap;
-        }
-        
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -23,50 +17,36 @@
             box-sizing: border-box;
             text-align: center;
             background-color: #ffffff;
-            /* Prevent FOUC (Flash of Unstyled Content) */
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        body.loaded {
-            opacity: 1;
         }
         
         .container {
-            opacity: 0;
-            transition: opacity 2s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            /* Set fixed dimensions to prevent layout shifts */
-            width: 100%;
-            max-width: 600px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
         }
         
-        .container.visible {
-            opacity: 1;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         .logo-text {
             font-size: 50px;
             font-weight: bold;
             margin-bottom: 20px;
-            height: 60px; /* Reserve space */
         }
         
         .logo-image {
             width: 150px;
             margin-bottom: 30px;
-            height: 150px; /* Reserve space for image */
         }
         
         .logo-image img {
             width: 100%;
             height: auto;
-            /* Hide until loaded */
-            opacity: 0;
-            transition: opacity 0.3s;
         }
         
         .tagline {
@@ -74,7 +54,6 @@
             font-style: italic;
             margin-bottom: 20px;
             max-width: 600px;
-            min-height: 50px; /* Reserve space */
         }
         
         .form-container {
@@ -122,7 +101,7 @@
     <!-- End MailerLite Universal -->
 </head>
 <body>
-    <div class="container" id="container">
+    <div class="container">
         <div class="logo-text">Loopz</div>
         <div class="logo-image">
             <img src="light-logo.png" alt="Loopz Logo">
@@ -136,26 +115,7 @@
     </div>
 
     <script>
-        // Hide page until everything is ready
-        document.body.style.opacity = '0';
-        
-        // Wait for everything to load before animating
-        window.addEventListener('load', function() {
-            // Make body visible first
-            document.body.classList.add('loaded');
-            
-            // Handle image loading specifically
-            const logoImg = document.querySelector('.logo-image img');
-            if (logoImg) {
-                if (logoImg.complete) {
-                    logoImg.style.opacity = '1';
-                } else {
-                    logoImg.onload = function() {
-                        logoImg.style.opacity = '1';
-                    };
-                }
-            }
-            
+        document.addEventListener('DOMContentLoaded', function() {
             // Simple tagline rotation
             const taglines = [
                 "Clarity isn't about doing more. It's about knowing why you're doing anything at all.",
@@ -168,12 +128,7 @@
             const randomIndex = Math.floor(Math.random() * taglines.length);
             taglineElement.textContent = taglines[randomIndex];
             
-            // Fade in container after everything is loaded and positioned
-            setTimeout(function() {
-                document.getElementById('container').classList.add('visible');
-            }, 100);
-            
-            // Ensure MailerLite elements get our styling
+            // Style the MailerLite form elements
             setTimeout(function() {
                 const emailInput = document.querySelector('input[type="email"]');
                 if (emailInput) {
