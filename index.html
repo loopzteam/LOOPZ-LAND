@@ -41,8 +41,7 @@
         .logo-image {
             width: 150px;
             margin-bottom: 30px;
-            /* Removed opacity: 0 to ensure logo is always visible */
-            animation: pulse 3s infinite ease-in-out;
+            /* Logo is static - no animation */
         }
         
         .logo-image img {
@@ -110,7 +109,7 @@
     <div class="logo-image">
         <img src="light-logo.png" alt="Loopz Logo">
     </div>
-    <div class="tagline">
+    <div class="tagline" id="tagline">
         Clarity isn't about doing more. It's about knowing why you're doing anything at all.
     </div>
     <div class="form-container">
@@ -118,9 +117,24 @@
     </div>
 
     <script>
-        // Additional animation for the logo
         document.addEventListener('DOMContentLoaded', function() {
-            // Logo is already visible and pulsing via CSS
+            // Rotate taglines
+            const taglines = [
+                "Clarity isn't about doing more. It's about knowing why you're doing anything at all.",
+                "Less noise. More signal.",
+                "Make space for what matters.",
+                "Focus on the essential. Eliminate the rest.",
+                "Simplify your mind. Amplify your impact.",
+                "Clarity comes from knowing what to ignore.",
+                "Think better. Not more.",
+                "The space between thoughts is where clarity lives.",
+                "Design your mind like you design your life."
+            ];
+            
+            // Randomly select a tagline on page load
+            const taglineElement = document.getElementById('tagline');
+            const randomIndex = Math.floor(Math.random() * taglines.length);
+            taglineElement.textContent = taglines[randomIndex];
             
             // Ensure MailerLite elements get our styling
             setTimeout(function() {
