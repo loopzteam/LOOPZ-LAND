@@ -6,14 +6,8 @@
     <title>Loopz</title>
     <style>
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         body {
@@ -28,6 +22,19 @@
             box-sizing: border-box;
             text-align: center;
             background-color: #ffffff;
+            /* Prevent content shifting during load */
+            overflow-y: scroll;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+            /* Set min-height to prevent layout shift */
+            min-height: 400px;
         }
         
         .logo-text {
@@ -106,15 +113,17 @@
     <!-- End MailerLite Universal -->
 </head>
 <body>
-    <div class="logo-text">Loopz</div>
-    <div class="logo-image">
-        <img src="light-logo.png" alt="Loopz Logo">
-    </div>
-    <div class="tagline" id="tagline">
-        Clarity isn't about doing more. It's about knowing why you're doing anything at all.
-    </div>
-    <div class="form-container">
-        <div class="ml-embedded" data-form="LGzWwI"></div>
+    <div class="content-wrapper">
+        <div class="logo-text">Loopz</div>
+        <div class="logo-image">
+            <img src="light-logo.png" alt="Loopz Logo">
+        </div>
+        <div class="tagline" id="tagline">
+            Clarity isn't about doing more. It's about knowing why you're doing anything at all.
+        </div>
+        <div class="form-container">
+            <div class="ml-embedded" data-form="LGzWwI"></div>
+        </div>
     </div>
 
     <script>
