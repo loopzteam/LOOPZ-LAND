@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loopz</title>
     <style>
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -22,34 +17,30 @@
             box-sizing: border-box;
             text-align: center;
             background-color: #ffffff;
-            /* Prevent content shifting during load */
-            overflow-y: scroll;
         }
         
-        .content-wrapper {
+        .container {
+            opacity: 0;
+            transition: opacity 2s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            max-width: 600px;
-            /* Set min-height to prevent layout shift */
-            min-height: 400px;
+        }
+        
+        .container.visible {
+            opacity: 1;
         }
         
         .logo-text {
             font-size: 50px;
             font-weight: bold;
             margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
         }
         
         .logo-image {
             width: 150px;
             margin-bottom: 30px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out 0.3s forwards;
         }
         
         .logo-image img {
@@ -60,17 +51,13 @@
         .tagline {
             color: #777;
             font-style: italic;
-            margin-bottom: 20px; /* Reduced from 40px to 20px */
+            margin-bottom: 20px;
             max-width: 600px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out 0.6s forwards;
         }
         
         .form-container {
             width: 100%;
-            max-width: 300px; /* Reduced from 600px to 300px */
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out 0.9s forwards;
+            max-width: 300px;
         }
         
         /* Additional styling to match MailerLite form with the design */
@@ -113,7 +100,7 @@
     <!-- End MailerLite Universal -->
 </head>
 <body>
-    <div class="content-wrapper">
+    <div class="container" id="container">
         <div class="logo-text">Loopz</div>
         <div class="logo-image">
             <img src="light-logo.png" alt="Loopz Logo">
@@ -128,23 +115,22 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Rotate taglines
+            // Simple tagline rotation
             const taglines = [
                 "Clarity isn't about doing more. It's about knowing why you're doing anything at all.",
                 "Less noise. More signal.",
-                "Make space for what matters.",
-                "Focus on the essential. Eliminate the rest.",
-                "Simplify your mind. Amplify your impact.",
-                "Clarity comes from knowing what to ignore.",
-                "Think better. Not more.",
-                "The space between thoughts is where clarity lives.",
-                "Design your mind like you design your life."
+                "Make space for what matters."
             ];
             
             // Randomly select a tagline on page load
             const taglineElement = document.getElementById('tagline');
             const randomIndex = Math.floor(Math.random() * taglines.length);
             taglineElement.textContent = taglines[randomIndex];
+            
+            // Simple fade in for the entire container
+            setTimeout(function() {
+                document.getElementById('container').classList.add('visible');
+            }, 100);
             
             // Ensure MailerLite elements get our styling
             setTimeout(function() {
