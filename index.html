@@ -16,12 +16,6 @@
             100% { transform: scale(1); }
         }
         
-        @keyframes drawPath {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-        
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -47,14 +41,13 @@
         .logo-image {
             width: 150px;
             margin-bottom: 30px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out 0.3s forwards;
+            /* Removed opacity: 0 to ensure logo is always visible */
+            animation: pulse 3s infinite ease-in-out;
         }
         
-        .logo-path {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawPath 2s ease-out 0.5s forwards;
+        .logo-image img {
+            width: 100%;
+            height: auto;
         }
         
         .tagline {
@@ -115,10 +108,7 @@
 <body>
     <div class="logo-text">Loopz</div>
     <div class="logo-image">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
-            <path class="logo-path" d="M100,40 C80,40 65,50 65,70 C65,85 75,95 85,95 C70,95 60,85 60,70 C60,50 75,40 95,40 C110,40 120,50 120,65 C120,80 110,90 100,100 C90,90 80,80 80,65 C80,50 90,40 105,40" fill="none" stroke="black" stroke-width="8"/>
-            <path class="logo-path" d="M100,160 C120,160 135,150 135,130 C135,115 125,105 115,105 C130,105 140,115 140,130 C140,150 125,160 105,160 C90,160 80,150 80,135 C80,120 90,110 100,100 C110,110 120,120 120,135 C120,150 110,160 95,160" fill="none" stroke="black" stroke-width="8"/>
-        </svg>
+        <img src="light-logo.png" alt="Loopz Logo">
     </div>
     <div class="tagline">
         Clarity isn't about doing more. It's about knowing why you're doing anything at all.
@@ -130,11 +120,7 @@
     <script>
         // Additional animation for the logo
         document.addEventListener('DOMContentLoaded', function() {
-            // Pulse animation for the logo after it's drawn
-            setTimeout(function() {
-                const logoImage = document.querySelector('.logo-image');
-                logoImage.style.animation = 'pulse 3s infinite ease-in-out';
-            }, 2500);
+            // Logo is already visible and pulsing via CSS
             
             // Ensure MailerLite elements get our styling
             setTimeout(function() {
